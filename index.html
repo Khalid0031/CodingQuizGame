@@ -11,11 +11,11 @@
     <h1>Multiple Choice Coding Quiz</h1>
     <div id="question-container">
       <p id="question"></p>
-      <div class="option" onclick="checkAnswer(1)" id="option1"></div>
-      <div class="option" onclick="checkAnswer(2)" id="option2"></div>
-      <div class="option" onclick="checkAnswer(3)" id="option3"></div>
+      <div class="option" id="option1" onclick="checkAnswer(0)"></div>
+      <div class="option" id="option2" onclick="checkAnswer(1)"></div>
+      <div class="option" id="option3" onclick="checkAnswer(2)"></div>
     </div>
-    <button id="next-btn" onclick="nextQuestion()">Next Question</button>
+    <button id="next-btn" onclick="nextQuestion()" disabled>Next Question</button>
     <button id="play-again-btn" style="display:none;" onclick="playAgain()">Play Again</button>
     <p id="score"></p>
   </div>
