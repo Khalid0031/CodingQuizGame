@@ -1,72 +1,91 @@
-let questions = [
-    {
-      question: "What is the correct syntax to output 'Hello World' in Python?",
-      options: ["print('Hello World')", "echo 'Hello World'", "printf('Hello World')"],
-      answer: 1
-    },
-    {
-      question: "What does HTML stand for?",
-      options: ["Hyper Trainer Marking Language", "Hyper Text Markup Language", "Hyper Text Marketing Language"],
-      answer: 2
-    },
-    {
-      question: "Which language is used to style the appearance of web apps?",
-      options: ["PHP", "JavaScript", "CSS"],
-      answer: 3
-    }
-  ];
-  
-  let currentQuestionIndex = 0;
-  let score = 0;
-  let answered = false;  // This prevents answering the same question multiple times
-  
-  function displayQuestion() {
-    const currentQuestion = questions[currentQuestionIndex];
-    document.getElementById("question").textContent = currentQuestion.question;
-    document.getElementById("option1").textContent = currentQuestion.options[0];
-    document.getElementById("option2").textContent = currentQuestion.options[1];
-    document.getElementById("option3").textContent = currentQuestion.options[2];
-    answered = false; // Reset for the next question
+const questions = [
+  {
+    question: "What does HTML stand for?",
+    options: ["Hyper Text Markup Language", "Hot Mail", "How to Make Lasagna"],
+    correct: 0
+  },
+  {
+    question: "What does CSS stand for?",
+    options: ["Creative Style Sheets", "Cascading Style Sheets", "Computer Style Sheets"],
+    correct: 1
+  },
+  {
+    question: "What does JS stand for?",
+    options: ["Java Super", "Just Script", "JavaScript"],
+    correct: 2
   }
-  
-  function checkAnswer(option) {
-    if (answered) return;  // Prevent multiple attempts on the same question
-  
-    const currentQuestion = questions[currentQuestionIndex];
-    if (option === currentQuestion.answer) {
-      score++;
-      alert("Correct!");
-    } else {
-      alert("Wrong answer!");
-    }
-  
-    answered = true; // Mark this question as answered
-    document.getElementById("next-btn").disabled = false; // Enable the Next button
+];
+
+let currentQuestionIndex = 0;
+let score = 0;
+
+const questionElement = document.getElementById("question");
+const optionElements = [document.getElementById("option1"), document.getElementById("option2"), document.getElementById("option3")];
+const nextButton = document.getElementById("next-btn");
+const playAgainButton = document.getElementById("play-again-btn");
+const scoreElement = document.getElementById("score");
+
+function loadQuestion() {
+  resetState();
+  const currentQuestion = questions[currentQuestionIndex];
+  questionElement.textContent = currentQuestion.question;
+  optionElements.forEach((option, index) => {
+    option.textContent = currentQuestion.options[index];
+  });
+}
+
+function resetState() {
+  optionElements.forEach(option => {
+    option.disabled = false;
+    option.style.backgroundColor = "#007bff"; // Reset button color
+    option.style.color = "white";
+  });
+  nextButton.disabled = true;
+}
+
+function checkAnswer(selectedIndex) {
+  const currentQuestion = questions[currentQuestionIndex];
+  const correctIndex = currentQuestion.correct;
+
+  optionElements.forEach(option => option.disabled = true); // Disable all options
+
+  if (selectedIndex === correctIndex) {
+    score++;
+    optionElements[selectedIndex].style.backgroundColor = "green"; // Correct answer
+  } else {
+    optionElements[selectedIndex].style.backgroundColor = "red"; // Wrong answer
+    optionElements[correctIndex].style.backgroundColor = "green"; // Correct answer highlighted
   }
-  
-  function nextQuestion() {
-    currentQuestionIndex++;
-    if (currentQuestionIndex >= questions.length) {
-      // End of the game, show score and play again button
-      document.getElementById("score").textContent = `Game Over! Your score is: ${score}/${questions.length}`;
-      document.getElementById("next-btn").style.display = "none"; // Hide the Next button
-      document.getElementById("play-again-btn").style.display = "inline"; // Show Play Again button
-    } else {
-      displayQuestion();
-      document.getElementById("next-btn").disabled = true; // Disable the Next button until an answer is given
-    }
+
+  nextButton.disabled = false; // Enable next button after an answer is selected
+}
+
+function nextQuestion() {
+  currentQuestionIndex++;
+  if (currentQuestionIndex < questions.length) {
+    loadQuestion();
+  } else {
+    endGame();
   }
-  
-  function playAgain() {
-    score = 0;
-    currentQuestionIndex = 0;
-    document.getElementById("score").textContent = ""; // Clear the score text
-    document.getElementById("next-btn").style.display = "inline"; // Show the Next button
-    document.getElementById("play-again-btn").style.display = "none"; // Hide Play Again button
-    displayQuestion();  // Start the quiz again
-  }
-  
-  // Start the game by displaying the first question
-  displayQuestion();
-  document.getElementById("next-btn").disabled = true; // Initially disable Next button
-  
+}
+
+function endGame() {
+  questionElement.textContent = `Game Over! You scored ${score} out of ${questions.length}`;
+  optionElements.forEach(option => option.style.display = "none"); // Hide options
+  nextButton.style.display = "none"; // Hide next button
+  playAgainButton.style.display = "block"; // Show play again button
+  scoreElement.textContent = `Final Score: ${score}/${questions.length}`;
+}
+
+function playAgain() {
+  currentQuestionIndex = 0;
+  score = 0;
+  nextButton.style.display = "block"; // Show next button
+  playAgainButton.style.display = "none"; // Hide play again button
+  optionElements.forEach(option => option.style.display = "block"); // Show options
+  scoreElement.textContent = "";
+  loadQuestion();
+}
+
+// Load the first question when the page loads
+loadQuestion();
