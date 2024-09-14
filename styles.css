@@ -1,0 +1,109 @@
+/* Overall Body Styling */
+body {
+    font-family: 'Roboto', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background: linear-gradient(135deg, #6a11cb, #2575fc);
+    color: #fff;
+  }
+  
+  /* Game Container */
+  #game-container {
+    background-color: #ffffff;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    max-width: 450px;
+    width: 100%;
+    color: #333;
+  }
+  
+  /* Headings */
+  h1 {
+    font-size: 2em;
+    margin-bottom: 20px;
+    color: #6a11cb; /* Matches gradient for consistency */
+  }
+  
+  /* Question Text */
+  #question {
+    font-size: 1.2em;
+    margin-bottom: 15px;
+    font-weight: 500;
+  }
+  
+  /* Option Buttons */
+  .option {
+    background-color: #007bff;
+    color: white;
+    padding: 15px;
+    margin: 10px 0;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1.1em;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+  }
+  
+  .option:hover {
+    background-color: #0056b3;
+    transform: scale(1.05);
+  }
+  
+  .option:active {
+    background-color: #004494;
+  }
+  
+  /* Next Button */
+  #next-btn {
+    margin-top: 20px;
+    padding: 12px 20px;
+    border: none;
+    background-color: #28a745;
+    color: white;
+    border-radius: 8px;
+    font-size: 1.1em;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  #next-btn:hover {
+    background-color: #218838;
+  }
+  
+  #next-btn:disabled {
+    background-color: grey;
+    cursor: not-allowed;
+  }
+  
+  /* Score Text */
+  #score {
+    margin-top: 25px;
+    font-size: 1.2em;
+    font-weight: bold;
+    color: #333;
+  }
+  
+  /* Add a subtle glow effect around the game container */
+  #game-container {
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+  }
+  
+  /* Styling the overall responsiveness */
+  @media (max-width: 500px) {
+    #game-container {
+      padding: 20px;
+    }
+  
+    .option {
+      font-size: 1em;
+    }
+  
+    #next-btn {
+      font-size: 1em;
+      padding: 10px 15px;
+    }
+  }

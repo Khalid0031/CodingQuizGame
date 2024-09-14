@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Multiple Choice Coding Game</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div id="game-container">
+    <h1>Multiple Choice Coding Quiz</h1>
+    <div id="question-container">
+      <p id="question"></p>
+      <div class="option" onclick="checkAnswer(1)" id="option1"></div>
+      <div class="option" onclick="checkAnswer(2)" id="option2"></div>
+      <div class="option" onclick="checkAnswer(3)" id="option3"></div>
+    </div>
+    <button id="next-btn" onclick="nextQuestion()">Next Question</button>
+    <button id="play-again-btn" style="display:none;" onclick="playAgain()">Play Again</button>
+    <p id="score"></p>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
