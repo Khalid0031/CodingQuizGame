@@ -1,8 +1,8 @@
 const questions = [
   {
     question: "What does HTML stand for?",
-    options: ["Hyper Text Markup Language", "Hot Mail", "How to Make Lasagna"],
-    correct: 0
+    options: ["Hyper Trainer Marking Language", "Hyper Text Markup Language", "Hyper Text Marketing Language"],
+    correct: 2
   },
   {
     question: "What does CSS stand for?",
