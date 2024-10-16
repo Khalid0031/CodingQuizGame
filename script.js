@@ -2,19 +2,23 @@ const questions = [
   {
     question: "What does HTML stand for?",
     options: ["Hyper Trainer Marking Language", "Hyper Text Markup Language", "Hyper Text Marketing Language"],
-    correct: 2
+    correct: 1,
+    explanation: "HTML stands for Hyper Text Markup Language, which is the standard language for creating web pages."
   },
   {
     question: "What does CSS stand for?",
     options: ["Creative Style Sheets", "Cascading Style Sheets", "Computer Style Sheets"],
-    correct: 1
+    correct: 1,
+    explanation: "CSS stands for Cascading Style Sheets, which is used to style and layout web pages."
   },
   {
     question: "What does JS stand for?",
     options: ["Java Super", "Just Script", "JavaScript"],
-    correct: 2
+    correct: 2,
+    explanation: "JS stands for JavaScript, a programming language that is commonly used to create interactive effects within web browsers."
   }
 ];
+
 
 let currentQuestionIndex = 0;
 let score = 0;
@@ -41,7 +45,14 @@ function resetState() {
     option.style.color = "white";
   });
   nextButton.disabled = true;
+
+  // Remove the explanation text
+  const explanationElement = document.querySelector("#question-container p:last-child");
+  if (explanationElement) {
+    explanationElement.remove();
+  }
 }
+
 
 function checkAnswer(selectedIndex) {
   const currentQuestion = questions[currentQuestionIndex];
@@ -57,8 +68,15 @@ function checkAnswer(selectedIndex) {
     optionElements[correctIndex].style.backgroundColor = "green"; // Correct answer highlighted
   }
 
+  // Display explanation below the options
+  const explanationElement = document.createElement("p");
+  explanationElement.textContent = currentQuestion.explanation;
+  explanationElement.style.color = "#333"; // Styling the text
+  document.getElementById("question-container").appendChild(explanationElement);
+
   nextButton.disabled = false; // Enable next button after an answer is selected
 }
+
 
 function nextQuestion() {
   currentQuestionIndex++;
