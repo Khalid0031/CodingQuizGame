@@ -83,9 +83,15 @@ function nextQuestion() {
   if (currentQuestionIndex < questions.length) {
     loadQuestion();
   } else {
+    // Clear the explanation before ending the game
+    const explanationElement = document.querySelector("#question-container p:last-child");
+    if (explanationElement) {
+      explanationElement.remove();
+    }
     endGame();
   }
 }
+
 
 function endGame() {
   // Clear any existing explanation text
