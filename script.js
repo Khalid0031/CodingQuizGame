@@ -88,12 +88,19 @@ function nextQuestion() {
 }
 
 function endGame() {
+  // Clear any existing explanation text
+  const explanationElement = document.querySelector("#question-container p:last-child");
+  if (explanationElement) {
+    explanationElement.remove();
+  }
+
   questionElement.textContent = `Game Over! You scored ${score} out of ${questions.length}`;
   optionElements.forEach(option => option.style.display = "none"); // Hide options
   nextButton.style.display = "none"; // Hide next button
   playAgainButton.style.display = "block"; // Show play again button
   scoreElement.textContent = `Final Score: ${score}/${questions.length}`;
 }
+
 
 function playAgain() {
   currentQuestionIndex = 0;
