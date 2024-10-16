@@ -19,7 +19,6 @@ const questions = [
   }
 ];
 
-
 let currentQuestionIndex = 0;
 let score = 0;
 
@@ -47,12 +46,8 @@ function resetState() {
   nextButton.disabled = true;
 
   // Remove the explanation text
-  const explanationElement = document.querySelector("#question-container p:last-child");
-  if (explanationElement) {
-    explanationElement.remove();
-  }
+  removeExplanation();
 }
-
 
 function checkAnswer(selectedIndex) {
   const currentQuestion = questions[currentQuestionIndex];
@@ -77,28 +72,18 @@ function checkAnswer(selectedIndex) {
   nextButton.disabled = false; // Enable next button after an answer is selected
 }
 
-
 function nextQuestion() {
   currentQuestionIndex++;
   if (currentQuestionIndex < questions.length) {
     loadQuestion();
   } else {
-    // Clear the explanation before ending the game
-    const explanationElement = document.querySelector("#question-container p:last-child");
-    if (explanationElement) {
-      explanationElement.remove();
-    }
     endGame();
   }
 }
 
-
 function endGame() {
   // Clear any existing explanation text
-  const explanationElement = document.querySelector("#question-container p:last-child");
-  if (explanationElement) {
-    explanationElement.remove();
-  }
+  removeExplanation();
 
   questionElement.textContent = `Game Over! You scored ${score} out of ${questions.length}`;
   optionElements.forEach(option => option.style.display = "none"); // Hide options
@@ -107,6 +92,13 @@ function endGame() {
   scoreElement.textContent = `Final Score: ${score}/${questions.length}`;
 }
 
+// New helper function to remove explanation
+function removeExplanation() {
+  const explanationElement = document.querySelector("#question-container p:last-child");
+  if (explanationElement) {
+    explanationElement.remove();
+  }
+}
 
 function playAgain() {
   currentQuestionIndex = 0;
